@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Caravan Residency — Begin the Great Work</title>
+<meta name="description" content="Caravan Residency is a live-in, project-based curriculum for adults 18+ — three Eras, sixteen tiles, one community. Enugu, Nigeria.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=EB+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=Space+Mono:wght@400;700&display=swap');
+
+/* ─── RESET & BASE ─────────────────────────────────────────────── */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+:root{
+  --void:#080810;
+  --panel:#100c1b;
+  --panel-2:#140f22;
+  --parchment:#E8E0D0;
+  --muted:rgba(232,224,208,0.56);
+  --muted-2:rgba(232,224,208,0.30);
+  --gold:#C9A84C;
+  --gold-light:#F5D06A;
+  --sage:#4CAF77;
+  --sage-light:#72E49A;
+  --amethyst:#8B6FD4;
+  --amethyst-light:#B89FFF;
+  --line:rgba(201,168,76,0.18);
+  --line-soft:rgba(255,255,255,0.08);
+}
+body{
+  background:var(--void);
+  color:var(--parchment);
+  font-family:'EB Garamond',Georgia,serif;
+  font-size:18px;
+  line-height:1.65;
+  min-height:100vh;
+  overflow-x:hidden;
+}
+h1,h2,h3{font-family:'Cinzel',serif;font-weight:600;letter-spacing:0.01em;}
+.mono{font-family:'Space Mono',monospace;}
+a{color:var(--gold-light);}
+::selection{background:rgba(201,168,76,0.3);color:var(--parchment);}
+::-webkit-scrollbar{width:5px;}
+::-webkit-scrollbar-track{background:transparent;}
+::-webkit-scrollbar-thumb{background:rgba(201,168,76,0.35);border-radius:3px;}
+
+a:focus-visible,button:focus-visible,input:focus-visible{
+  outline:2px solid var(--gold-light);outline-offset:3px;border-radius:2px;
+}
+
+@media (prefers-reduced-motion: reduce){
+  *{animation-duration:0.01ms !important;animation-iteration-count:1 !important;transition-duration:0.01ms !important;scroll-behavior:auto !important;}
+}
+
+.container{max-width:1080px;margin:0 auto;padding:0 24px;}
+.eyebrow{
+  font-family:'Space Mono',monospace;font-size:0.7rem;letter-spacing:0.35em;
+  color:var(--gold);text-transform:uppercase;margin-bottom:14px;display:block;
+}
+.section{padding:110px 24px;position:relative;}
+.section-head{max-width:640px;margin-bottom:56px;}
+.section-head h2{font-size:clamp(1.7rem,3.4vw,2.5rem);line-height:1.25;margin-bottom:16px;color:var(--parchment);}
+.section-head p{color:var(--muted);font-size:1.08rem;max-width:560px;}
+
+.reveal{opacity:0;transform:translateY(22px);transition:opacity 0.8s ease,transform 0.8s ease;}
+.reveal.visible{opacity:1;transform:translateY(0);}
+
+.btn{
+  font-family:'Cinzel',serif;font-size:0.78rem;letter-spacing:0.16em;
+  padding:15px 34px;border-radius:2px;cursor:pointer;text-decoration:none;
+  display:inline-flex;align-items:center;gap:10px;transition:all 0.25s ease;border:1px solid transparent;
+}
+.btn-primary{background:var(--gold);color:#1a1408;border-color:var(--gold);}
+.btn-primary:hover{background:var(--gold-light);border-color:var(--gold-light);box-shadow:0 0 28px rgba(201,168,76,0.3);}
+.btn-outline{background:transparent;color:var(--gold-light);border-color:rgba(201,168,76,0.45);}
+.btn-outline:hover{background:rgba(201,168,76,0.1);border-color:var(--gold-light);}
+
+/* ─── NAV ──────────────────────────────────────────────────────── */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:200;
+  background:rgba(8,8,16,0.85);backdrop-filter:blur(14px);
+  border-bottom:1px solid var(--line-soft);
+}
+.nav-inner{max-width:1080px;margin:0 auto;padding:0 24px;height:64px;display:flex;align-items:center;justify-content:space-between;}
+.brand{font-family:'Cinzel',serif;font-size:0.85rem;letter-spacing:0.28em;color:var(--gold-light);text-decoration:none;}
+.nav-links{display:flex;gap:30px;list-style:none;}
+.nav-links a{font-family:'Space Mono',monospace;font-size:0.72rem;letter-spacing:0.06em;color:var(--muted);text-decoration:none;transition:color 0.2s;}
+.nav-links a:hover{color:var(--gold-light);}
+.nav-cta{display:flex;align-items:center;gap:20px;}
+.nav-cta .btn{padding:10px 22px;font-size:0.68rem;}
+.burger{display:none;background:none;border:none;color:var(--parchment);font-size:1.4rem;cursor:pointer;}
+.mobile-menu{
+  position:fixed;inset:0;z-index:190;background:var(--void);
+  display:none;flex-direction:column;align-items:center;justify-content:center;gap:28px;
+}
+.mobile-menu.open{display:flex;}
+.mobile-menu a{font-family:'Cinzel',serif;color:var(--parchment);text-decoration:none;font-size:1.1rem;letter-spacing:0.08em;}
+.mobile-close{position:absolute;top:22px;right:24px;background:none;border:none;color:var(--parchment);font-size:1.6rem;cursor:pointer;}
+
+@media (max-width:860px){
+  .nav-links{display:none;}
+  .nav-cta .btn{display:none;}
+  .burger{display:block;}
+}
+
+/* ─── HERO ─────────────────────────────────────────────────────── */
+.hero{
+  min-height:100vh;display:flex;align-items:center;justify-content:center;
+  padding:140px 24px 80px;position:relative;overflow:hidden;
+  background:radial-gradient(ellipse at 50% 28%, rgba(201,168,76,0.08) 0%, transparent 62%),var(--void);
+}
+.seed-svg{
+  position:absolute;top:50%;left:50%;width:min(900px,150vw);height:auto;
+  transform:translate(-50%,-50%);opacity:0.14;pointer-events:none;
+  animation:spin 140s linear infinite;
+}
+@keyframes spin{from{transform:translate(-50%,-50%) rotate(0deg);}to{transform:translate(-50%,-50%) rotate(360deg);}}
+.hero-inner{position:relative;z-index:2;max-width:720px;text-align:center;margin:0 auto;}
+.hero h1{
+  font-size:clamp(2.1rem,5.4vw,3.6rem);line-height:1.15;margin-bottom:22px;
+  color:var(--parchment);
+}
+.hero h1 em{font-style:normal;color:var(--gold-light);}
+.hero .lead{color:var(--muted);font-size:1.15rem;max-width:560px;margin:0 auto 40px;}
+
+.threshold-form{
+  display:flex;gap:10px;max-width:440px;margin:0 auto 18px;flex-wrap:wrap;justify-content:center;
+}
+.threshold-form input{
+  flex:1;min-width:200px;background:rgba(255,255,255,0.05);border:1px solid rgba(201,168,76,0.35);
+  color:var(--parchment);font-family:'EB Garamond',Georgia,serif;font-size:1rem;padding:14px 16px;
+  border-radius:2px;outline:none;
+}
+.threshold-form input::placeholder{color:var(--muted-2);}
+.threshold-form input:focus{border-color:var(--gold-light);}
+.threshold-form button{white-space:nowrap;}
+
+.hero-note{font-size:0.85rem;color:var(--muted-2);margin-bottom:48px;}
+.hero-note a{color:var(--muted);text-decoration:underline;text-underline-offset:3px;}
+.hero-note a:hover{color:var(--gold-light);}
+
+.stat-row{
+  display:flex;justify-content:center;gap:0;flex-wrap:wrap;border-top:1px solid var(--line);padding-top:26px;
+}
+.stat-row span{
+  font-family:'Space Mono',monospace;font-size:0.7rem;letter-spacing:0.1em;color:var(--muted);
+  padding:0 18px;border-right:1px solid var(--line-soft);
+}
+.stat-row span:last-child{border-right:none;}
+.stat-row strong{color:var(--gold-light);}
+
+/* ─── PULL QUOTE ───────────────────────────────────────────────── */
+.pull-quote{padding:80px 24px;text-align:center;border-top:1px solid var(--line-soft);border-bottom:1px solid var(--line-soft);}
+.pull-quote blockquote{
+  font-family:'EB Garamond',Georgia,serif;font-style:italic;font-size:clamp(1.15rem,2.6vw,1.55rem);
+  line-height:1.6;color:var(--parchment);max-width:720px;margin:0 auto 18px;
+}
+.pull-quote cite{font-family:'Space Mono',monospace;font-size:0.75rem;letter-spacing:0.12em;color:var(--gold);font-style:normal;}
+
+/* ─── AGITATION ────────────────────────────────────────────────── */
+.agitation{background:var(--panel);}
+.agitation .grid-2{display:grid;grid-template-columns:1.1fr 0.9fr;gap:60px;align-items:start;}
+.agitation-points{display:flex;flex-direction:column;gap:22px;}
+.agitation-points li{list-style:none;padding-left:26px;position:relative;color:var(--muted);font-size:0.98rem;}
+.agitation-points li::before{content:"—";position:absolute;left:0;color:var(--gold);}
+@media (max-width:820px){.agitation .grid-2{grid-template-columns:1fr;gap:32px;}}
+
+/* ─── ERAS ─────────────────────────────────────────────────────── */
+.era-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;}
+.era-card{
+  border:1px solid var(--line-soft);border-radius:6px;padding:32px 26px;background:rgba(255,255,255,0.02);
+  transition:border-color 0.3s,transform 0.3s;
+}
+.era-card:hover{transform:translateY(-4px);}
+.era-card .roman{font-family:'Cinzel',serif;font-size:2.2rem;line-height:1;margin-bottom:14px;}
+.era-card h3{font-size:1.15rem;margin-bottom:4px;}
+.era-card .sub{font-style:italic;color:var(--muted);font-size:0.9rem;margin-bottom:18px;}
+.era-card ul{list-style:none;display:flex;flex-direction:column;gap:8px;margin-bottom:18px;}
+.era-card li{font-size:0.9rem;color:var(--muted);padding-left:16px;position:relative;}
+.era-card li::before{content:"·";position:absolute;left:0;}
+.era-card .tag{font-family:'Space Mono',monospace;font-size:0.65rem;letter-spacing:0.1em;padding:4px 10px;border-radius:10px;display:inline-block;}
+.era-1{border-color:rgba(201,168,76,0.3);} .era-1 .roman,.era-1 li::before{color:var(--gold);} .era-1 .tag{background:rgba(201,168,76,0.15);color:var(--gold-light);}
+.era-2{border-color:rgba(76,175,119,0.3);} .era-2 .roman,.era-2 li::before{color:var(--sage);} .era-2 .tag{background:rgba(76,175,119,0.15);color:var(--sage-light);}
+.era-3{border-color:rgba(139,111,212,0.3);} .era-3 .roman,.era-3 li::before{color:var(--amethyst);} .era-3 .tag{background:rgba(139,111,212,0.15);color:var(--amethyst-light);}
+@media (max-width:900px){.era-grid{grid-template-columns:1fr;}}
+
+/* ─── CURRICULUM ───────────────────────────────────────────────── */
+.curriculum{background:var(--panel);}
+.topic-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;}
+.topic-card{
+  border:1px solid var(--line-soft);border-radius:6px;padding:22px 18px;background:rgba(255,255,255,0.02);
+  transition:border-color 0.25s,background 0.25s;
+}
+.topic-card:hover{border-color:rgba(201,168,76,0.4);background:rgba(201,168,76,0.04);}
+.topic-card .glyph{font-size:1.3rem;color:var(--gold);margin-bottom:10px;display:block;}
+.topic-card h3{font-size:0.98rem;margin-bottom:6px;line-height:1.3;}
+.topic-card p{font-size:0.85rem;color:var(--muted);}
+@media (max-width:900px){.topic-grid{grid-template-columns:repeat(2,1fr);}}
+@media (max-width:520px){.topic-grid{grid-template-columns:1fr;}}
+
+/* ─── RHYTHM ───────────────────────────────────────────────────── */
+.rhythm-strip{display:flex;flex-direction:column;border-top:1px solid var(--line-soft);}
+.rhythm-row{display:flex;align-items:baseline;gap:24px;padding:18px 0;border-bottom:1px solid var(--line-soft);}
+.rhythm-row .time{font-family:'Space Mono',monospace;color:var(--gold-light);min-width:70px;font-size:0.85rem;}
+.rhythm-row .label{font-family:'Cinzel',serif;font-size:0.95rem;letter-spacing:0.03em;min-width:200px;}
+.rhythm-row .desc{color:var(--muted);font-size:0.92rem;}
+@media (max-width:700px){.rhythm-row{flex-wrap:wrap;} .rhythm-row .desc{width:100%;padding-left:94px;font-size:0.85rem;}}
+
+/* ─── ARCHETYPES ───────────────────────────────────────────────── */
+.archetypes{background:var(--panel);}
+.archetype-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:14px;}
+.archetype-card{
+  border:1px solid var(--line-soft);border-radius:6px;padding:24px 16px;text-align:center;cursor:pointer;
+  background:rgba(255,255,255,0.02);transition:all 0.25s;
+}
+.archetype-card:hover,.archetype-card.active{border-color:var(--gold);background:rgba(201,168,76,0.06);}
+.archetype-card .glyph{font-size:1.8rem;color:var(--gold);display:block;margin-bottom:10px;}
+.archetype-card h3{font-size:0.85rem;letter-spacing:0.08em;margin-bottom:10px;}
+.archetype-card p{font-size:0.82rem;color:var(--muted);max-height:0;overflow:hidden;transition:max-height 0.35s ease;}
+.archetype-card.active p{max-height:200px;}
+@media (max-width:900px){.archetype-grid{grid-template-columns:repeat(2,1fr);}}
+
+/* ─── WHO FOR ──────────────────────────────────────────────────── */
+.who-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px 40px;}
+.who-grid li{list-style:none;display:flex;gap:14px;align-items:flex-start;padding:14px 0;border-bottom:1px solid var(--line-soft);}
+.who-grid li .mark{color:var(--gold);font-family:'Cinzel',serif;}
+.who-grid li span.txt{color:var(--parchment);font-size:0.98rem;}
+@media (max-width:700px){.who-grid{grid-template-columns:1fr;}}
+
+/* ─── CTA CIRCLE ───────────────────────────────────────────────── */
+.cta-circle{
+  background:linear-gradient(160deg, rgba(201,168,76,0.07) 0%, transparent 55%),var(--void);
+  border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+  text-align:center;
+}
+.cta-circle .container{max-width:660px;}
+.cta-circle h2{font-size:clamp(1.8rem,4vw,2.6rem);margin-bottom:18px;}
+.cta-circle p{color:var(--muted);font-size:1.05rem;margin-bottom:34px;}
+.cta-circle .btn-primary{padding:18px 44px;font-size:0.85rem;}
+.cta-note{margin-top:18px;font-size:0.85rem;color:var(--muted-2);}
+
+/* ─── FAQ ──────────────────────────────────────────────────────── */
+.faq-item{border-bottom:1px solid var(--line-soft);}
+.faq-q{
+  width:100%;background:none;border:none;text-align:left;padding:22px 0;cursor:pointer;
+  display:flex;justify-content:space-between;align-items:center;gap:20px;color:var(--parchment);
+  font-family:'Cinzel',serif;font-size:1rem;letter-spacing:0.01em;
+}
+.faq-q .icon{font-size:1.1rem;color:var(--gold);transition:transform 0.3s;flex-shrink:0;}
+.faq-item.open .faq-q .icon{transform:rotate(45deg);}
+.faq-a{max-height:0;overflow:hidden;transition:max-height 0.4s ease;}
+.faq-a p{padding:0 0 22px;color:var(--muted);font-size:0.98rem;max-width:640px;}
+
+/* ─── FOOTER ───────────────────────────────────────────────────── */
+footer{padding:70px 24px 40px;text-align:center;border-top:1px solid var(--line-soft);}
+.footer-mark{color:var(--gold);letter-spacing:0.5em;font-size:0.8rem;margin-bottom:18px;}
+footer .brand-name{font-family:'Cinzel',serif;font-size:1rem;letter-spacing:0.24em;color:var(--gold-light);margin-bottom:6px;}
+footer .tagline{font-family:'Space Mono',monospace;font-size:0.7rem;letter-spacing:0.15em;color:var(--muted);margin-bottom:22px;}
+footer .meta{font-size:0.9rem;color:var(--muted);margin-bottom:6px;}
+footer .whatsapp-link{color:var(--gold-light);text-decoration:none;}
+footer .invocation{font-style:italic;color:var(--muted-2);font-size:0.85rem;margin:26px 0 18px;}
+footer .copyright{font-family:'Space Mono',monospace;font-size:0.68rem;color:var(--muted-2);letter-spacing:0.05em;}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="#hero" class="brand">✦ CARAVAN</a>
+    <ul class="nav-links">
+      <li><a href="#eras">The Eras</a></li>
+      <li><a href="#curriculum">Curriculum</a></li>
+      <li><a href="#rhythm">Daily Life</a></li>
+      <li><a href="#faq">FAQ</a></li>
+    </ul>
+    <div class="nav-cta">
+      <a class="btn btn-primary" href="https://wa.me/2347036362857?text=Hi%20Azanon%2C%20I%27d%20like%20to%20learn%20more%20about%20the%20Caravan%20Residency%20and%20the%20Premium%20Circle." target="_blank" rel="noopener">Join the Circle</a>
+    </div>
+    <button class="burger" id="burgerBtn" aria-label="Open menu">☰</button>
+  </div>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu">
+  <button class="mobile-close" id="mobileClose" aria-label="Close menu">✕</button>
+  <a href="#eras">The Eras</a>
+  <a href="#curriculum">Curriculum</a>
+  <a href="#rhythm">Daily Life</a>
+  <a href="#faq">FAQ</a>
+  <a class="btn btn-primary" href="https://wa.me/2347036362857?text=Hi%20Azanon%2C%20I%27d%20like%20to%20learn%20more%20about%20the%20Caravan%20Residency%20and%20the%20Premium%20Circle." target="_blank" rel="noopener">Join the Circle</a>
+</div>
+
+<!-- ─── HERO ─────────────────────────────────────────────── -->
+<header class="hero" id="hero">
+  <svg class="seed-svg" viewBox="0 0 400 400" aria-hidden="true">
+    <g fill="none" stroke="#C9A84C" stroke-width="1">
+      <circle cx="200" cy="200" r="70"/>
+      <circle cx="270" cy="200" r="70"/>
+      <circle cx="235" cy="260.6" r="70"/>
+      <circle cx="165" cy="260.6" r="70"/>
+      <circle cx="130" cy="200" r="70"/>
+      <circle cx="165" cy="139.4" r="70"/>
+      <circle cx="235" cy="139.4" r="70"/>
+    </g>
+  </svg>
+  <div class="hero-inner">
+    <span class="eyebrow">Enugu, Nigeria · For Adults 18+</span>
+    <h1>You found the door most classrooms never <em>show you.</em></h1>
+    <p class="lead">Caravan Residency is a live-in, project-based curriculum that picks up exactly where conventional schooling stops — three Eras, sixteen tiles, one community, built for adults ready to do the actual work.</p>
+
+    <form class="threshold-form" id="thresholdForm">
+      <input type="text" id="thresholdName" placeholder="Your first name" aria-label="Your first name" autocomplete="given-name">
+      <button type="submit" class="btn btn-primary">Step Through →</button>
+    </form>
+    <p class="hero-note"><a href="#curriculum">or see what you'd actually study first ↓</a></p>
+
+    <div class="stat-row">
+      <span><strong>3</strong> Eras</span>
+      <span><strong>16</strong> Tiles</span>
+      <span><strong>Live-In</strong>, Enugu</span>
+      <span><strong>18+</strong> Only</span>
+    </div>
+  </div>
+</header>
+
+<!-- ─── PULL QUOTE ───────────────────────────────────────── -->
+<section class="pull-quote reveal">
+  <blockquote>"The point of the Caravan Residency is to groom competent, antifragile, sovereign, independent, collaborative individuals."</blockquote>
+  <cite>— Azanon, Founder</cite>
+</section>
+
+<!-- ─── AGITATION ────────────────────────────────────────── -->
+<section class="agitation section" id="why">
+  <div class="container">
+    <div class="grid-2">
+      <div class="reveal">
+        <span class="eyebrow">The Gap No Syllabus Names</span>
+        <h2>You were trained to pass tests. Almost no one trained you to build a life.</h2>
+        <p style="color:var(--muted);font-size:1.02rem;">Formal education is excellent at transferring information and quiet about everything else — judgment, resilience, a working theory of how reality actually operates. Caravan exists for adults who've noticed that gap: people who've done well by conventional measures and still feel the floor is thinner than it should be. The curriculum won't hand you certainty. It hands you a rigorous, hands-on way to go find it yourself.</p>
+      </div>
+      <ul class="agitation-points reveal">
+        <li>Real projects with a mentor and a deliverable, not lectures and a grade</li>
+        <li>Primary sources over secondhand summaries, in every unit</li>
+        <li>A community that tests ideas against direct experience, not consensus</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ─── ERAS ─────────────────────────────────────────────── -->
+<section class="section" id="eras">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">The Architecture</span>
+      <h2>Principle → Form → Mastery</h2>
+      <p>Three Eras, each a different depth of the same question: how does the invisible become real, and what do you do once you can see it?</p>
+    </div>
+    <div class="era-grid">
+      <div class="era-card era-1 reveal">
+        <div class="roman">I</div>
+        <h3>Principle</h3>
+        <div class="sub">The non-physical architecture</div>
+        <ul>
+          <li>Direct experience &amp; contemplative practice</li>
+          <li>Universal &amp; galactic law</li>
+          <li>Spirit, source, and the nature of the I AM</li>
+          <li>Syntropy, entropy &amp; the unified field</li>
+        </ul>
+        <span class="tag">Tiles 1–4</span>
+      </div>
+      <div class="era-card era-2 reveal">
+        <div class="roman">II</div>
+        <h3>Form</h3>
+        <div class="sub">How the invisible becomes physical</div>
+        <ul>
+          <li>Sacred geometry &amp; cosmic cycles</li>
+          <li>Frontier physics &amp; the electric universe</li>
+          <li>The real nature of power</li>
+          <li>Bioelectricity &amp; the biology of belief</li>
+        </ul>
+        <span class="tag">Tiles 5–12</span>
+      </div>
+      <div class="era-card era-3 reveal">
+        <div class="roman">III</div>
+        <h3>Mastery</h3>
+        <div class="sub">Sovereign action in the real world</div>
+        <ul>
+          <li>Expanded communication &amp; human potential</li>
+          <li>Community leadership</li>
+          <li>Profitable, cooperative enterprise</li>
+          <li>A legacy that outlasts your time here</li>
+        </ul>
+        <span class="tag">Tiles 13–16</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── CURRICULUM ───────────────────────────────────────── -->
+<section class="curriculum section" id="curriculum">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">What You'll Actually Study</span>
+      <h2>Sixteen tiles. Four gates. One long apprenticeship.</h2>
+      <p>Every tile is taught from primary sources and tested through a real project — approached as serious inquiry, not settled doctrine.</p>
+    </div>
+    <div class="topic-grid">
+      <div class="topic-card reveal"><span class="glyph">⚖</span><h3>Universal &amp; Galactic Law</h3><p>The frameworks other subjects assume, but rarely teach directly.</p></div>
+      <div class="topic-card reveal"><span class="glyph">◌</span><h3>Direct Experience Practice</h3><p>Meditation, breathwork, and contemplative method as a foundation.</p></div>
+      <div class="topic-card reveal"><span class="glyph">◈</span><h3>Sacred Geometry &amp; Cycles</h3><p>Pattern, ratio, and rhythm as the grammar of form.</p></div>
+      <div class="topic-card reveal"><span class="glyph">◊</span><h3>Frontier Physics</h3><p>Zero-point energy, the electric universe, and the far edges of the field.</p></div>
+      <div class="topic-card reveal"><span class="glyph">◉</span><h3>Epigenetics &amp; Belief</h3><p>How environment and belief shape gene expression.</p></div>
+      <div class="topic-card reveal"><span class="glyph">⬡</span><h3>Bioelectric Medicine</h3><p>The body as an electrical, holographic system.</p></div>
+      <div class="topic-card reveal"><span class="glyph">⟁</span><h3>Real-World Power</h3><p>How global systems actually function — and how to build outside them.</p></div>
+      <div class="topic-card reveal"><span class="glyph">✦</span><h3>Sovereign Economics</h3><p>Cooperative enterprise models built to outlast their founders.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── RHYTHM ───────────────────────────────────────────── -->
+<section class="section" id="rhythm">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">A Day In The Caravan</span>
+      <h2>Structure, not chaos.</h2>
+      <p>Immersion doesn't mean disorder. Every day runs on a rhythm designed for depth.</p>
+    </div>
+    <div class="rhythm-strip reveal">
+      <div class="rhythm-row"><span class="time">05:30</span><span class="label">Dawn Practice</span><span class="desc">Meditation, breathwork, or quiet movement before the day opens.</span></div>
+      <div class="rhythm-row"><span class="time">07:00</span><span class="label">Sunrise Council</span><span class="desc">Full community circle — intentions, gratitude, one teaching.</span></div>
+      <div class="rhythm-row"><span class="time">09:00</span><span class="label">Project Deep Work</span><span class="desc">Three focused hours, individually or in groups, mentors on hand.</span></div>
+      <div class="rhythm-row"><span class="time">13:00</span><span class="label">Learning Expedition</span><span class="desc">Guest mentor, field trip, or skills workshop.</span></div>
+      <div class="rhythm-row"><span class="time">19:30</span><span class="label">Circle of Selves</span><span class="desc">Small-group reflection — six to eight residents and a mentor.</span></div>
+      <div class="rhythm-row"><span class="time">22:00</span><span class="label">Lights Out</span><span class="desc">Rest as practice.</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── ARCHETYPES ───────────────────────────────────────── -->
+<section class="archetypes section" id="archetype">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">Who You Become</span>
+      <h2>Choose your Archetype.</h2>
+      <p>Every resident enters under a role that names their nature. Tap one to see what it means.</p>
+    </div>
+    <div class="archetype-grid">
+      <div class="archetype-card reveal" data-archetype>
+        <span class="glyph">✦</span><h3>HEALER</h3>
+        <p>You mend what is broken — in bodies, in hearts, in the web of life.</p>
+      </div>
+      <div class="archetype-card reveal" data-archetype>
+        <span class="glyph">◈</span><h3>BUILDER</h3>
+        <p>You make the invisible tangible. Form follows your vision.</p>
+      </div>
+      <div class="archetype-card reveal" data-archetype>
+        <span class="glyph">◉</span><h3>ORACLE</h3>
+        <p>You read the patterns others cannot see. The field speaks through you.</p>
+      </div>
+      <div class="archetype-card reveal" data-archetype>
+        <span class="glyph">⬡</span><h3>KEEPER</h3>
+        <p>You protect what is sacred. Memory and tradition live in your hands.</p>
+      </div>
+      <div class="archetype-card reveal" data-archetype>
+        <span class="glyph">⟁</span><h3>WARRIOR</h3>
+        <p>You face what others avoid. The jaguar meets its equal in you.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── WHO FOR ──────────────────────────────────────────── -->
+<section class="section" id="who">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">Is This You</span>
+      <h2>Who Caravan is built for</h2>
+    </div>
+    <ul class="who-grid reveal">
+      <li><span class="mark">✦</span><span class="txt">You're 18 or older and fully responsible for your own decisions</span></li>
+      <li><span class="mark">✦</span><span class="txt">You've succeeded by conventional measures and want more than the next credential</span></li>
+      <li><span class="mark">✦</span><span class="txt">You can commit to real immersion, not another tab you'll close in a week</span></li>
+      <li><span class="mark">✦</span><span class="txt">You'd rather test a claim yourself than argue about it online</span></li>
+      <li><span class="mark">✦</span><span class="txt">You want community as much as curriculum — people building alongside you</span></li>
+      <li><span class="mark">✦</span><span class="txt">You're ready to be evaluated on real projects, not a standardized test</span></li>
+    </ul>
+  </div>
+</section>
+
+<!-- ─── CTA CIRCLE ───────────────────────────────────────── -->
+<section class="cta-circle section" id="circle">
+  <div class="container reveal">
+    <span class="eyebrow">Start Here</span>
+    <h2>The Premium Circle</h2>
+    <p>Not ready to relocate to Enugu yet? The Premium Circle is the front door — ongoing access to core material, direct contact with mentors, and a standing invitation to the full Residency once you're ready to go all in. Every Residency application starts here.</p>
+    <a class="btn btn-primary" href="https://wa.me/2347036362857?text=Hi%20Azanon%2C%20I%27d%20like%20to%20join%20the%20Premium%20Circle." target="_blank" rel="noopener">Join the Premium Circle</a>
+    <p class="cta-note">Cohorts are kept small on purpose. Message us and we'll walk you through timing and terms.</p>
+  </div>
+</section>
+
+<!-- ─── FAQ ──────────────────────────────────────────────── -->
+<section class="section" id="faq">
+  <div class="container" style="max-width:760px;">
+    <div class="section-head reveal">
+      <span class="eyebrow">Before You Message Us</span>
+      <h2>Questions, answered plainly</h2>
+    </div>
+    <div class="reveal">
+      <div class="faq-item">
+        <button class="faq-q"><span>What is Caravan Residency, in one sentence?</span><span class="icon">+</span></button>
+        <div class="faq-a"><p>A live-in, project-based curriculum in Enugu, Nigeria that takes adults through three Eras — Principle, Form, and Mastery — building real competence, community, and enterprise along the way.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q"><span>Do I have to move to Nigeria to start?</span><span class="icon">+</span></button>
+        <div class="faq-a"><p>To complete the full Residency, yes — it's a live-in program by design. Most people start in the Premium Circle first, which is remote, while they prepare for the move.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q"><span>What's the time commitment?</span><span class="icon">+</span></button>
+        <div class="faq-a"><p>The full Residency runs across three Eras with no fixed clock — you progress by demonstrated competence, not the calendar. Caravan is built around full immersion rather than an indefinite part-time track, so expect it to become your main commitment once you join.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q"><span>Is this tied to a particular religion?</span><span class="icon">+</span></button>
+        <div class="faq-a"><p>No single tradition. The curriculum draws on Hermetic philosophy, multiple wisdom traditions, and frontier science, treated as material for direct inquiry rather than doctrine to accept on faith.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q"><span>I'm skeptical about some of this. Can I still apply?</span><span class="icon">+</span></button>
+        <div class="faq-a"><p>Yes — skepticism paired with a willingness to actually test things firsthand is exactly the disposition Caravan is built for. Weigh every claim against your own experience and evidence.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q"><span>Can I leave if it's not for me?</span><span class="icon">+</span></button>
+        <div class="faq-a"><p>Participation is voluntary throughout. If the Residency isn't the right fit, talk to your mentor and the team about stepping back.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q"><span>How do I apply?</span><span class="icon">+</span></button>
+        <div class="faq-a"><p>Message us on WhatsApp — that's the fastest way to reach the team and start the conversation.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── FOOTER ───────────────────────────────────────────── -->
+<footer>
+  <div class="footer-mark">✦ ✦ ✦</div>
+  <div class="brand-name">CARAVAN RESIDENCY</div>
+  <div class="tagline">PRINCIPLE · FORM · MASTERY</div>
+  <div class="meta">Enugu, Nigeria — for adults 18 and above</div>
+  <div class="meta"><a class="whatsapp-link" href="https://wa.me/2347036362857" target="_blank" rel="noopener">WhatsApp: +234 703 636 2857</a></div>
+  <p class="invocation">"The world is as you dream it. Change the dream, change the world." — Numi, Shuar Shaman, via John Perkins</p>
+  <div class="copyright">© 2026 CARAVAN RESIDENCY. THE GREAT WORK CONTINUES.</div>
+</footer>
+
+<script>
+// Mobile nav
+const burgerBtn = document.getElementById('burgerBtn');
+const mobileMenu = document.getElementById('mobileMenu');
+const mobileClose = document.getElementById('mobileClose');
+burgerBtn.addEventListener('click', () => mobileMenu.classList.add('open'));
+mobileClose.addEventListener('click', () => mobileMenu.classList.remove('open'));
+mobileMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => mobileMenu.classList.remove('open')));
+
+// Threshold form -> WhatsApp
+document.getElementById('thresholdForm').addEventListener('submit', function(e){
+  e.preventDefault();
+  const name = document.getElementById('thresholdName').value.trim();
+  const msg = name
+    ? "Hi Azanon, I'm " + name + " — I'd like to step through and learn more about the Caravan Residency."
+    : "Hi Azanon, I'd like to step through and learn more about the Caravan Residency.";
+  window.open('https://wa.me/2347036362857?text=' + encodeURIComponent(msg), '_blank');
+});
+
+// FAQ accordion
+document.querySelectorAll('.faq-item').forEach(item => {
+  const q = item.querySelector('.faq-q');
+  const a = item.querySelector('.faq-a');
+  q.addEventListener('click', () => {
+    const isOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item.open').forEach(other => {
+      if(other !== item){ other.classList.remove('open'); other.querySelector('.faq-a').style.maxHeight = null; }
+    });
+    if(isOpen){ item.classList.remove('open'); a.style.maxHeight = null; }
+    else{ item.classList.add('open'); a.style.maxHeight = a.scrollHeight + 'px'; }
+  });
+});
+
+// Archetype reveal
+document.querySelectorAll('[data-archetype]').forEach(card => {
+  card.addEventListener('click', () => card.classList.toggle('active'));
+});
+
+// Scroll reveal
+const revealEls = document.querySelectorAll('.reveal');
+const io = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if(entry.isIntersecting){ entry.target.classList.add('visible'); io.unobserve(entry.target); }
+  });
+}, { threshold: 0.15 });
+revealEls.forEach(el => io.observe(el));
+</script>
+</body>
+</html>
